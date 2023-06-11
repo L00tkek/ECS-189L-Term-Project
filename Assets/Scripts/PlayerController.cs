@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
 
-    float walkSpeed = 10f;
+    [SerializeField] float walkSpeed;
     float inputHorizontal;
     float inputVertical;
 
@@ -28,5 +28,14 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = new Vector2(inputHorizontal, inputVertical).normalized * walkSpeed;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Bbbbb");
+        if (collision.gameObject.tag == "Task")
+        {
+            Destroy(collision.gameObject);
+        }
     }
 }
