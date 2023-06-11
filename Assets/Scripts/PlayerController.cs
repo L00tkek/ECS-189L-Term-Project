@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
 
+    [SerializeField] Sprite[] spriteArray;
     [SerializeField] float walkSpeed;
     float inputHorizontal;
     float inputVertical;
@@ -15,6 +16,8 @@ public class PlayerController : MonoBehaviour
     float timer;
     const float MAX_TIMER = 0.5f;
     [SerializeField] TextMeshProUGUI test;
+    bool isMoving = false;
+    int anim = 0;
 
 
     // Start is called before the first frame update
@@ -32,12 +35,28 @@ public class PlayerController : MonoBehaviour
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
 
+        isMoving = inputHorizontal != 0.0f || inputVertical != 0.0f;
+
         timer += Time.deltaTime;
         if (timer > MAX_TIMER)
         {
             timer = 0f;
             spoons--;
             test.SetText("Spoons: {0}", spoons);
+        }
+
+        anim += 1;
+        anim %= 8;
+
+        var spriteRenderer = GetComponent<SpriteRenderer>();
+        if (isMoving) {
+            if (anim / 4 % 2 == 0) {
+                spriteRenderer.sprite = spriteArray[1];
+            } else {
+                spriteRenderer.sprite = spriteArray[0];
+            }
+        } else {
+            spriteRenderer.sprite = spriteArray[0];
         }
     }
 
