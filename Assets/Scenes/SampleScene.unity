@@ -155,6 +155,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2350c68c184d83746b0bf31911a6f187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteArray:
+  - {fileID: -401229590, guid: e992c24f7181c7546808201f378f1862, type: 3}
+  - {fileID: -569122111, guid: e992c24f7181c7546808201f378f1862, type: 3}
+  - {fileID: -1780240503, guid: e992c24f7181c7546808201f378f1862, type: 3}
+  - {fileID: 1283199801, guid: e992c24f7181c7546808201f378f1862, type: 3}
+  - {fileID: 2006856105, guid: e992c24f7181c7546808201f378f1862, type: 3}
+  - {fileID: 233000053, guid: e992c24f7181c7546808201f378f1862, type: 3}
+  - {fileID: 404740126, guid: e992c24f7181c7546808201f378f1862, type: 3}
+  - {fileID: 59631445, guid: e992c24f7181c7546808201f378f1862, type: 3}
   walkSpeed: 10
   test: {fileID: 0}
 --- !u!50 &19900837
