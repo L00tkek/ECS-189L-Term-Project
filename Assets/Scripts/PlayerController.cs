@@ -105,6 +105,11 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(inputHorizontal, inputVertical).normalized * walkSpeed;
     }
 
+    public Vector2 GetVelocity()
+    {
+        return rb.velocity;
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Bbbbb");
