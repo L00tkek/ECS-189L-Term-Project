@@ -17,6 +17,11 @@ public class PlayerController : MonoBehaviour
     const float MAX_TIMER = 0.5f;
     [SerializeField] TextMeshProUGUI test;
     bool isMoving = false;
+    // 0: forward (down, towards camera)
+    // 1: right
+    // 2: backward (up, away from camera)
+    // 3: left
+    int directionFacing = 0;
     int anim = 0;
 
 
@@ -36,6 +41,18 @@ public class PlayerController : MonoBehaviour
         inputVertical = Input.GetAxisRaw("Vertical");
 
         isMoving = inputHorizontal != 0.0f || inputVertical != 0.0f;
+        if (inputHorizontal < 0.0f) {
+            directionFacing = 3;
+        }
+        if (inputHorizontal > 0.0f) {
+            directionFacing = 1;
+        }
+        if (inputVertical < 0.0f) {
+            directionFacing = 0;
+        }
+        if (inputVertical > 0.0f) {
+            directionFacing = 2;
+        }
 
         timer += Time.deltaTime;
         if (timer > MAX_TIMER)
@@ -49,14 +66,36 @@ public class PlayerController : MonoBehaviour
         anim %= 8;
 
         var spriteRenderer = GetComponent<SpriteRenderer>();
-        if (isMoving) {
-            if (anim / 4 % 2 == 0) {
-                spriteRenderer.sprite = spriteArray[1];
-            } else {
-                spriteRenderer.sprite = spriteArray[0];
+        if (isMoving && anim / 4 % 2 == 0) {
+            switch (directionFacing) {
+                case 0:
+                    spriteRenderer.sprite = spriteArray[1];
+                    break;
+                case 1:
+                    spriteRenderer.sprite = spriteArray[3];
+                    break;
+                case 2:
+                    spriteRenderer.sprite = spriteArray[5];
+                    break;
+                case 3:
+                    spriteRenderer.sprite = spriteArray[7];
+                    break;
             }
         } else {
-            spriteRenderer.sprite = spriteArray[0];
+            switch (directionFacing) {
+                case 0:
+                    spriteRenderer.sprite = spriteArray[0];
+                    break;
+                case 1:
+                    spriteRenderer.sprite = spriteArray[2];
+                    break;
+                case 2:
+                    spriteRenderer.sprite = spriteArray[4];
+                    break;
+                case 3:
+                    spriteRenderer.sprite = spriteArray[6];
+                    break;
+            }
         }
     }
 
