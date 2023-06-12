@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     float fatigue;
     [SerializeField] GameObject fatigueOverlay;
 
+    [SerializeField] TextMeshProUGUI lossText;
+
 
     // Start is called before the first frame update
     void Start()
@@ -51,7 +53,7 @@ public class PlayerController : MonoBehaviour
         if (timer > MAX_TIMER)
         {
             timer = 0f;
-            spoons--;
+            spoons -= 4;
             if (spoons < -100) {
                 spoons = -100;
             }
@@ -107,9 +109,16 @@ public class PlayerController : MonoBehaviour
 
     void UpdateText()
     {
+        lossText.text = "";
+
         if (spoons < 0)
         {
             spoonsText.SetText("Knives: {0}", spoons * -1);
+
+            if (spoons <= -100)
+            {
+                lossText.text = "You lose.";
+            }
         }
         else
         {

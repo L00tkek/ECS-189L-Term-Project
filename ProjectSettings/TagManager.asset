@@ -49,3 +49,6 @@ TagManager:
   - name: Foreground
     uniqueID: 1234738029
     locked: 0
+  - name: YouLose
+    uniqueID: 1352114491
+    locked: 0

@@ -21,6 +21,7 @@ public class TaskManager : MonoBehaviour
         this.rand = new System.Random();
         this.timeElapsed = this.cooldown;
         this.numTasks = 0;
+        SpawnTasks();
         updateText();
     }
 
