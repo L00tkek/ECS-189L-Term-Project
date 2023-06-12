@@ -16,12 +16,14 @@ public class TaskManager : MonoBehaviour
     private float timeElapsed;
     private System.Random rand;
 
-    void Start()
+    // this code needs to be in Awake because
+    // it is relied on by the PlayerController init code,
+    // which is called in Start
+    void Awake()
     {
         this.rand = new System.Random();
         this.timeElapsed = this.cooldown;
         this.numTasks = 0;
-        SpawnTasks();
         updateText();
     }
 

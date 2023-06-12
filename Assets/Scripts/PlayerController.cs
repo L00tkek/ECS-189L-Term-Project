@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Sprite[] spriteArray;
     [SerializeField] float walkSpeed;
     [SerializeField] GameObject taskManager;
+    TaskManager managerScript;
     float inputHorizontal;
     float inputVertical;
 
@@ -35,10 +36,31 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        managerScript = taskManager.GetComponent<TaskManager>();
+
+        Restart();
+    }
+
+    void Restart()
+    {
         spoons = 100;
         timer = 0f;
         fatigue = 1f;
         UpdateText();
+
+        GameObject[] allTasks = GameObject.FindGameObjectsWithTag("Task");
+        Debug.Log(allTasks.Length);
+
+        foreach (GameObject toDestroy in allTasks)
+        {
+            Destroy(toDestroy);
+            managerScript.decrementTasks();
+        }
+
+        managerScript.SpawnTasks();
+
+        // reset the player's position to its initial position
+        gameObject.transform.position = new Vector3(8f, -5f, 0f);
     }
 
     // Update is called once per frame
@@ -65,6 +87,11 @@ public class PlayerController : MonoBehaviour
         Color overlayColor = Color.HSVToRGB(0, 1f, fatigue);
         overlayColor.a = 1 - fatigue;
         fatigueOverlay.GetComponent<SpriteRenderer>().color = overlayColor;
+
+        if (Input.GetKeyDown(KeyCode.R) && fatigue <= 0)
+        {
+            Restart();
+        }
     }
 
     void Animate()
@@ -117,7 +144,7 @@ public class PlayerController : MonoBehaviour
 
             if (spoons <= -100)
             {
-                lossText.text = "You lose.";
+                lossText.text = "You lose. But there is no escape. Press R to restart.";
             }
         }
         else
@@ -133,8 +160,6 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        TaskManager managerScript = taskManager.GetComponent<TaskManager>();
-
         if (collision.gameObject.CompareTag("Task"))
         {
             Destroy(collision.gameObject);
