@@ -41,19 +41,7 @@ public class PlayerController : MonoBehaviour
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
 
-        isMoving = inputHorizontal != 0.0f || inputVertical != 0.0f;
-        if (inputHorizontal < 0.0f) {
-            directionFacing = 3;
-        }
-        if (inputHorizontal > 0.0f) {
-            directionFacing = 1;
-        }
-        if (inputVertical < 0.0f) {
-            directionFacing = 0;
-        }
-        if (inputVertical > 0.0f) {
-            directionFacing = 2;
-        }
+        Animate();
 
         timer += Time.deltaTime;
         if (timer > MAX_TIMER)
@@ -63,13 +51,39 @@ public class PlayerController : MonoBehaviour
             UpdateText();
         }
 
+        
+    }
+
+    void Animate()
+    {
+        isMoving = inputHorizontal != 0.0f || inputVertical != 0.0f;
+        if (inputHorizontal < 0.0f)
+        {
+            directionFacing = 3;
+        }
+        if (inputHorizontal > 0.0f)
+        {
+            directionFacing = 1;
+        }
+        if (inputVertical < 0.0f)
+        {
+            directionFacing = 0;
+        }
+        if (inputVertical > 0.0f)
+        {
+            directionFacing = 2;
+        }
+
         anim += 1;
         anim %= 8;
 
         var spriteRenderer = GetComponent<SpriteRenderer>();
-        if (isMoving && anim / 4 % 2 == 0) {
+        if (isMoving && anim / 4 % 2 == 0)
+        {
             spriteRenderer.sprite = spriteArray[directionFacing * 2 + 1];
-        } else {
+        }
+        else
+        {
             spriteRenderer.sprite = spriteArray[directionFacing * 2];
         }
     }

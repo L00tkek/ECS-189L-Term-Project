@@ -166,7 +166,7 @@ MonoBehaviour:
   - {fileID: 59631445, guid: e992c24f7181c7546808201f378f1862, type: 3}
   walkSpeed: 10
   taskManager: {fileID: 603693306}
-  test: {fileID: 1345893123}
+  spoonsText: {fileID: 1345893123}
 --- !u!50 &19900837
 Rigidbody2D:
   serializedVersion: 4
@@ -4866,7 +4866,7 @@ GameObject:
   - component: {fileID: 1345893124}
   - component: {fileID: 1345893123}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Spoons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
