@@ -47,7 +47,10 @@ public class PlayerController : MonoBehaviour
         if (timer > MAX_TIMER)
         {
             timer = 0f;
-            spoons--;
+            spoons -= 4;
+            if (spoons < -100) {
+                spoons = -100;
+            }
             UpdateText();
         }
 
@@ -91,7 +94,8 @@ public class PlayerController : MonoBehaviour
     // physics-related movement goes here
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(inputHorizontal, inputVertical).normalized * walkSpeed;
+        var fatigue = spoons >= 0 ? 1 : Mathf.Sqrt((spoons + 100.0f) / 200.0f);
+        rb.velocity = new Vector2(inputHorizontal, inputVertical).normalized * walkSpeed * fatigue;
     }
 
     void UpdateText()
