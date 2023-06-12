@@ -7,7 +7,8 @@ public class TaskManager : MonoBehaviour
 {
     [SerializeField] protected GameObject taskPrefab;
     [SerializeField] float cooldown;
-    [SerializeField] float spawnRadius;
+    [SerializeField] float spawnWidth;
+    [SerializeField] float spawnHeight;
     [SerializeField] TextMeshProUGUI test;
     [SerializeField] int dailyTasks = 15;
 
@@ -40,8 +41,8 @@ public class TaskManager : MonoBehaviour
     public void SpawnTask()
     {
         GameObject task = (GameObject)Object.Instantiate(taskPrefab);
-        task.transform.position += new Vector3((float)(this.rand.NextDouble() * this.spawnRadius * 2.0 - this.spawnRadius), 
-            (float)(this.rand.NextDouble() * this.spawnRadius * 2.0 - this.spawnRadius), 0.0f);
+        task.transform.position = new Vector3((float)(this.rand.NextDouble() * this.spawnWidth - this.spawnWidth / 2.0), 
+            (float)(this.rand.NextDouble() * this.spawnHeight - this.spawnHeight / 2.0), 0.0f);
         incrementTasks();
     }
 

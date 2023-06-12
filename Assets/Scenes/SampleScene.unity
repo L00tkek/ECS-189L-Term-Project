@@ -611,7 +611,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskPrefab: {fileID: 2438209935356078994, guid: 885da06f498cf4b49a98a0f01c23846a, type: 3}
   cooldown: 2
-  spawnRadius: 4
+  spawnWidth: 20
+  spawnHeight: 12
   test: {fileID: 584844287}
   dailyTasks: 15
 --- !u!1 &739232358
