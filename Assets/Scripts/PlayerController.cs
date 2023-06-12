@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         spoons = 100;
         timer = 0f;
-        test.SetText("Spoons: {0}", spoons);
+        UpdateText();
     }
 
     // Update is called once per frame
@@ -60,14 +60,7 @@ public class PlayerController : MonoBehaviour
         {
             timer = 0f;
             spoons--;
-            if (spoons < 0)
-            {
-                test.SetText("Knives: {0}", spoons * -1);
-            }
-            else
-            {
-                test.SetText("Spoons: {0}", spoons);
-            }
+            UpdateText();
         }
 
         anim += 1;
@@ -87,6 +80,18 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(inputHorizontal, inputVertical).normalized * walkSpeed;
     }
 
+    void UpdateText()
+    {
+        if (spoons < 0)
+        {
+            test.SetText("Knives: {0}", spoons * -1);
+        }
+        else
+        {
+            test.SetText("Spoons: {0}", spoons);
+        }
+    }
+
     public Vector2 GetVelocity()
     {
         return rb.velocity;
@@ -94,12 +99,18 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Bbbbb");
+        TaskManager managerScript = taskManager.GetComponent<TaskManager>();
 
-        if (collision.gameObject.tag == "Task")
+        if (collision.gameObject.CompareTag("Task"))
         {
             Destroy(collision.gameObject);
-            taskManager.GetComponent<TaskManager>().decrementTasks();
+            managerScript.decrementTasks();
+        }
+        else if (collision.gameObject.CompareTag("Bed"))
+        {
+            spoons = Mathf.Min(100, spoons + 100);
+            UpdateText();
+            managerScript.SpawnTasks();
         }
     }
 }
