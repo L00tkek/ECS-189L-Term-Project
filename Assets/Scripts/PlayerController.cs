@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Sprite[] spriteArray;
     [SerializeField] float walkSpeed;
+    [SerializeField] GameObject taskManager;
     float inputHorizontal;
     float inputVertical;
 
@@ -91,6 +92,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Task")
         {
             Destroy(collision.gameObject);
+            taskManager.GetComponent<TaskManager>().decrementTasks();
         }
     }
 }
