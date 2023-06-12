@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
     int directionFacing = 0;
     int anim = 0;
 
+    float fatigue;
+    [SerializeField] GameObject fatigueOverlay;
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +35,7 @@ public class PlayerController : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         spoons = 100;
         timer = 0f;
+        fatigue = 1f;
         UpdateText();
     }
 
@@ -54,7 +58,11 @@ public class PlayerController : MonoBehaviour
             UpdateText();
         }
 
+        fatigue = spoons >= 0 ? 1 : Mathf.Sqrt((spoons + 100.0f) / 200.0f);
         
+        Color overlayColor = Color.HSVToRGB(0, 1f, fatigue);
+        overlayColor.a = 1 - fatigue;
+        fatigueOverlay.GetComponent<SpriteRenderer>().color = overlayColor;
     }
 
     void Animate()
@@ -94,7 +102,6 @@ public class PlayerController : MonoBehaviour
     // physics-related movement goes here
     void FixedUpdate()
     {
-        var fatigue = spoons >= 0 ? 1 : Mathf.Sqrt((spoons + 100.0f) / 200.0f);
         rb.velocity = new Vector2(inputHorizontal, inputVertical).normalized * walkSpeed * fatigue;
     }
 
