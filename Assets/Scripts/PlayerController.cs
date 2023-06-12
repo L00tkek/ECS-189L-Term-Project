@@ -67,35 +67,9 @@ public class PlayerController : MonoBehaviour
 
         var spriteRenderer = GetComponent<SpriteRenderer>();
         if (isMoving && anim / 4 % 2 == 0) {
-            switch (directionFacing) {
-                case 0:
-                    spriteRenderer.sprite = spriteArray[1];
-                    break;
-                case 1:
-                    spriteRenderer.sprite = spriteArray[3];
-                    break;
-                case 2:
-                    spriteRenderer.sprite = spriteArray[5];
-                    break;
-                case 3:
-                    spriteRenderer.sprite = spriteArray[7];
-                    break;
-            }
+            spriteRenderer.sprite = spriteArray[directionFacing * 2 + 1];
         } else {
-            switch (directionFacing) {
-                case 0:
-                    spriteRenderer.sprite = spriteArray[0];
-                    break;
-                case 1:
-                    spriteRenderer.sprite = spriteArray[2];
-                    break;
-                case 2:
-                    spriteRenderer.sprite = spriteArray[4];
-                    break;
-                case 3:
-                    spriteRenderer.sprite = spriteArray[6];
-                    break;
-            }
+            spriteRenderer.sprite = spriteArray[directionFacing * 2];
         }
     }
 
