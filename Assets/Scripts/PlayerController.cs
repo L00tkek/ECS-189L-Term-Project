@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Sprite[] spriteArray;
     [SerializeField] float walkSpeed;
     [SerializeField] GameObject taskManager;
+    [SerializeField] GameObject vignetteController;
     float inputHorizontal;
     float inputVertical;
 
@@ -65,6 +66,7 @@ public class PlayerController : MonoBehaviour
         Color overlayColor = Color.HSVToRGB(0, 1f, fatigue);
         overlayColor.a = 1 - fatigue;
         fatigueOverlay.GetComponent<SpriteRenderer>().color = overlayColor;
+        vignetteController.GetComponent<VignetteController>().setIntensity((1.0f - fatigue) * 0.5f);
     }
 
     void Animate()
