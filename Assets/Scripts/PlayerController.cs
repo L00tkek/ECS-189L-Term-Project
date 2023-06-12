@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
         overlayColor.a = 1 - fatigue;
         fatigueOverlay.GetComponent<SpriteRenderer>().color = overlayColor;
 
-        vignetteController.GetComponent<VignetteController>().setIntensity((1.0f - fatigue) * 0.5f);
+        vignetteController.GetComponent<VignetteController>().setIntensity(spoons == -100 ? 0.0f : (1.0f - fatigue) * 0.5f);
 
         if (Input.GetKeyDown(KeyCode.R) && fatigue <= 0)
         {
