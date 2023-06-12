@@ -60,7 +60,14 @@ public class PlayerController : MonoBehaviour
         {
             timer = 0f;
             spoons--;
-            test.SetText("Spoons: {0}", spoons);
+            if (spoons < 0)
+            {
+                test.SetText("Knives: {0}", spoons * -1);
+            }
+            else
+            {
+                test.SetText("Spoons: {0}", spoons);
+            }
         }
 
         anim += 1;
