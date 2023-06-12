@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     int spoons;
     float timer;
     const float MAX_TIMER = 0.5f;
-    [SerializeField] TextMeshProUGUI test;
+    [SerializeField] TextMeshProUGUI spoonsText;
     bool isMoving = false;
     // 0: forward (down, towards camera)
     // 1: right
@@ -84,11 +84,11 @@ public class PlayerController : MonoBehaviour
     {
         if (spoons < 0)
         {
-            test.SetText("Knives: {0}", spoons * -1);
+            spoonsText.SetText("Knives: {0}", spoons * -1);
         }
         else
         {
-            test.SetText("Spoons: {0}", spoons);
+            spoonsText.SetText("Spoons: {0}", spoons);
         }
     }
 
