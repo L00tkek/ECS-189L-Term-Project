@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
         if (timer > MAX_TIMER)
         {
             timer = 0f;
-            spoons -= 4;
+            spoons--;
             if (spoons < -100) {
                 spoons = -100;
             }
