@@ -92,6 +92,7 @@ public class MinigameController : MonoBehaviour
 
         if (this.index >= sequenceLength)
         {
+			this.player.GetComponent<PlayerController>().spoons -= 5;
             endGame();
         }
     }

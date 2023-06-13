@@ -16,9 +16,9 @@ public class PlayerController : MonoBehaviour
     float inputHorizontal;
     float inputVertical;
 
-    int spoons;
+    public int spoons;
     float timer;
-    const float MAX_TIMER = 0.5f;
+    const float MAX_TIMER = 2.0f;
     [SerializeField] TextMeshProUGUI spoonsText;
     bool isMoving = false;
     // 0: forward (down, towards camera)
@@ -171,8 +171,8 @@ public class PlayerController : MonoBehaviour
         else
         {
             spoonsText.SetText("Spoons: {0}", spoons);
-        }
-    }
+		}
+	}
 
     public Vector2 GetVelocity()
     {
@@ -186,7 +186,7 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
             rb.velocity = new Vector2(0, 0);
             //minigame.GetComponent<MinigameController>().startGame((int)(fatigue * -6.0f + 10.0f));
-            minigame.GetComponent<MinigameController>().startGame((int)((-1 * spoons + 100) / 28.75f) + 4);
+            minigame.GetComponent<MinigameController>().startGame((int)((100 - spoons) / 28.75f) + 4);
         }
         else if (collision.gameObject.CompareTag("Bed"))
         {
