@@ -163,6 +163,8 @@ public class PlayerController : MonoBehaviour
 
             if (spoons <= -100)
             {
+				minigame.GetComponent<MinigameController>().cancelPressed();
+				allowMovement = false;
                 lossText.text = "You lose. But there is no escape. Press R to restart.";
             }
         }
