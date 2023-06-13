@@ -13,6 +13,23 @@ public class MinigameController : MonoBehaviour
     private int[] numbers;
     private int index;
     private bool displayingNumbers;
+    private System.Random rand;
+
+    void shuffle()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                if ((int)(this.rand.NextDouble() * 2) == 0)
+                {
+                    int tmp = this.numbers[i];
+                    this.numbers[i] = this.numbers[j];
+                    this.numbers[j] = tmp;
+                }
+            }
+        }
+    }
 
     public void startGame()
     {
@@ -20,7 +37,8 @@ public class MinigameController : MonoBehaviour
         this.displayTime = 0.0f;
         this.player.GetComponent<PlayerController>().allowMovement = false;
         gameObject.SetActive(true);
-        this.numbers = new int[] {1,2,3,4,5};
+        this.numbers = new int[] {0,1,2,3,4,5,6,7,8,9};
+        shuffle();
         this.index = 0;
         this.displayingNumbers = true;
     }
@@ -77,6 +95,7 @@ public class MinigameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        this.rand = new System.Random();
         this.displayTime = 0.0f;
         this.index = 0;
     }
@@ -95,5 +114,10 @@ public class MinigameController : MonoBehaviour
                 displayNextNum();
             }
         }
+    }
+
+    void Awake()
+    {
+        this.rand = new System.Random();
     }
 }
