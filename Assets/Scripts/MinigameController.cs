@@ -10,19 +10,36 @@ public class MinigameController : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] float displayCooldown;
     private float displayTime;
+    private int[] numbers;
+    private int index;
+    private bool displayingNumbers;
 
     public void startGame()
     {
         this.displayText.SetText("");
-        displayTime = 0.0f;
-        player.GetComponent<PlayerController>().allowMovement = false;
+        this.displayTime = 0.0f;
+        this.player.GetComponent<PlayerController>().allowMovement = false;
         gameObject.SetActive(true);
+        this.numbers = new int[] {1,2,3,4,5};
+        this.index = 0;
+        this.displayingNumbers = true;
     }
 
     void endGame()
     {
-        player.GetComponent<PlayerController>().allowMovement = true;
+        this.player.GetComponent<PlayerController>().allowMovement = true;
         gameObject.SetActive(false);
+    }
+
+    void displayNextNum()
+    {
+        displayNum(numbers[index]);
+        this.index++;
+        if (this.index >= 5)
+        {
+            this.displayingNumbers = false;
+            this.index = 0;
+        }
     }
 
     void displayNum(int num)
@@ -33,9 +50,26 @@ public class MinigameController : MonoBehaviour
 
     public void buttonPressed(int buttonNum)
     {
-        displayNum(buttonNum);
-        if (buttonNum == 0)
+        if (this.displayingNumbers)
         {
+            return;
+        }
+
+        if (buttonNum == this.numbers[index])
+        {
+            this.displayText.color = new Color(0.0f, 1.0f, 0.0f, 1.0f);
+            this.index++;
+        }
+        else
+        {
+            this.displayText.color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+            this.index = 0;
+            this.displayingNumbers = true;
+        }
+
+        displayNum(buttonNum);
+
+        if (this.index >= 5) {
             endGame();
         }
     }
@@ -44,16 +78,22 @@ public class MinigameController : MonoBehaviour
     void Start()
     {
         this.displayTime = 0.0f;
+        this.index = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        displayTime -= Time.deltaTime;
-        if (displayTime <= 0.0f)
+        this.displayTime -= Time.deltaTime;
+        if (this.displayTime <= 0.0f)
         {
             this.displayText.SetText("");
-            displayTime = 0.0f;
+            this.displayTime = 0.0f;
+            if (this.displayingNumbers)
+            {
+                this.displayText.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+                displayNextNum();
+            }
         }
     }
 }
