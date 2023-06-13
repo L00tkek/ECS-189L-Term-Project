@@ -47,6 +47,7 @@ public class MinigameController : MonoBehaviour
 
     void endGame()
     {
+        this.player.GetComponent<PlayerController>().decrementTask();
         this.player.GetComponent<PlayerController>().allowMovement = true;
         gameObject.SetActive(false);
     }
@@ -89,9 +90,16 @@ public class MinigameController : MonoBehaviour
 
         displayNum(buttonNum);
 
-        if (this.index >= sequenceLength) {
+        if (this.index >= sequenceLength)
+        {
             endGame();
         }
+    }
+
+    public void cancelPressed()
+    {
+        this.player.GetComponent<PlayerController>().spawnTask();
+        endGame();
     }
 
     // Start is called before the first frame update
