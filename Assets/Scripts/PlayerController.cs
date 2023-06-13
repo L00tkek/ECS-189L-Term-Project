@@ -173,7 +173,8 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(collision.gameObject);
             rb.velocity = new Vector2(0, 0);
-            minigame.GetComponent<MinigameController>().startGame();
+            //minigame.GetComponent<MinigameController>().startGame((int)(fatigue * -6.0f + 10.0f));
+            minigame.GetComponent<MinigameController>().startGame((int)((-1 * spoons + 100) / 28.75f) + 4);
             managerScript.decrementTasks();
         }
         else if (collision.gameObject.CompareTag("Bed"))

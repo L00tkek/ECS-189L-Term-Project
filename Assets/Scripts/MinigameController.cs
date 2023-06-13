@@ -12,6 +12,7 @@ public class MinigameController : MonoBehaviour
     private float displayTime;
     private int[] numbers;
     private int index;
+    private int sequenceLength;
     private bool displayingNumbers;
     private System.Random rand;
 
@@ -31,8 +32,9 @@ public class MinigameController : MonoBehaviour
         }
     }
 
-    public void startGame()
+    public void startGame(int sequenceLength)
     {
+        this.sequenceLength = sequenceLength;
         this.displayText.SetText("");
         this.displayTime = 0.0f;
         this.player.GetComponent<PlayerController>().allowMovement = false;
@@ -53,7 +55,7 @@ public class MinigameController : MonoBehaviour
     {
         displayNum(numbers[index]);
         this.index++;
-        if (this.index >= 5)
+        if (this.index >= sequenceLength)
         {
             this.displayingNumbers = false;
             this.index = 0;
@@ -87,7 +89,7 @@ public class MinigameController : MonoBehaviour
 
         displayNum(buttonNum);
 
-        if (this.index >= 5) {
+        if (this.index >= sequenceLength) {
             endGame();
         }
     }
