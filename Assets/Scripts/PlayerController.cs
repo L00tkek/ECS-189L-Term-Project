@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject taskManager;
     TaskManager managerScript;
     [SerializeField] GameObject vignetteController;
+    [SerializeField] GameObject minigame;
     float inputHorizontal;
     float inputVertical;
 
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject fatigueOverlay;
 
     [SerializeField] TextMeshProUGUI lossText;
+    public bool allowMovement;
 
 
     // Start is called before the first frame update
@@ -62,6 +64,7 @@ public class PlayerController : MonoBehaviour
 
         // reset the player's position to its initial position
         gameObject.transform.position = new Vector3(8f, -5f, 0f);
+        allowMovement = true;
     }
 
     // Update is called once per frame
@@ -134,7 +137,10 @@ public class PlayerController : MonoBehaviour
     // physics-related movement goes here
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(inputHorizontal, inputVertical).normalized * walkSpeed * fatigue;
+        if (allowMovement)
+        {
+            rb.velocity = new Vector2(inputHorizontal, inputVertical).normalized * walkSpeed * fatigue;
+        }
     }
 
     void UpdateText()
@@ -166,6 +172,8 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Task"))
         {
             Destroy(collision.gameObject);
+            rb.velocity = new Vector2(0, 0);
+            minigame.GetComponent<MinigameController>().startGame();
             managerScript.decrementTasks();
         }
         else if (collision.gameObject.CompareTag("Bed"))
