@@ -41,7 +41,15 @@ public class PlayerController : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         managerScript = taskManager.GetComponent<TaskManager>();
 
-        Restart();
+        Lose();
+    }
+
+    void Lose()
+    {
+        spoons = -100;
+        fatigue = 0f;
+        allowMovement = false;
+        managerScript.randomSpawn = false;
     }
 
     void Restart()
@@ -49,6 +57,7 @@ public class PlayerController : MonoBehaviour
         spoons = 100;
         timer = 0f;
         fatigue = 1f;
+        managerScript.randomSpawn = true;
         UpdateText();
 
         GameObject[] allTasks = GameObject.FindGameObjectsWithTag("Task");
@@ -98,6 +107,10 @@ public class PlayerController : MonoBehaviour
         {
             Restart();
         }
+        else if (Input.GetKeyDown(KeyCode.L))
+        {
+            Lose();
+        }
     }
 
     void Animate()
@@ -141,6 +154,10 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(inputHorizontal, inputVertical).normalized * walkSpeed * fatigue;
         }
+        else
+        {
+            rb.velocity = new Vector2(0, 0);
+        }
     }
 
     public void decrementTask()
@@ -153,7 +170,7 @@ public class PlayerController : MonoBehaviour
         managerScript.SpawnTask();
     }
 
-    void UpdateText()
+    public void UpdateText()
     {
         lossText.text = "";
 
@@ -163,8 +180,8 @@ public class PlayerController : MonoBehaviour
 
             if (spoons <= -100)
             {
-				minigame.GetComponent<MinigameController>().cancelPressed();
-				allowMovement = false;
+                minigame.SetActive(false);
+                allowMovement = false;
                 lossText.text = "You lose. But there is no escape. Press R to restart.";
             }
         }

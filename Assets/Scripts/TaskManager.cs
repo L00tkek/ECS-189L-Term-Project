@@ -11,6 +11,7 @@ public class TaskManager : MonoBehaviour
     [SerializeField] float spawnHeight;
     [SerializeField] TextMeshProUGUI test;
     [SerializeField] int dailyTasks = 15;
+    public bool randomSpawn;
 
     private int numTasks;
     private float timeElapsed;
@@ -24,6 +25,7 @@ public class TaskManager : MonoBehaviour
         this.rand = new System.Random();
         this.timeElapsed = this.cooldown;
         this.numTasks = 0;
+        randomSpawn = false;
         updateText();
     }
 
@@ -38,11 +40,13 @@ public class TaskManager : MonoBehaviour
     }
 
     void updateText() {
+        Debug.Log(numTasks);
         test.SetText("Tasks: {0}", this.numTasks);
     }
 
     public void SpawnTask()
     {
+        // Debug.Log("Spawning Task");
         GameObject task = (GameObject)Object.Instantiate(taskPrefab);
         task.transform.position = new Vector3((float)(this.rand.NextDouble() * this.spawnWidth - this.spawnWidth / 2.0), 
             (float)(this.rand.NextDouble() * this.spawnHeight - this.spawnHeight / 2.0), 0.0f);
@@ -62,7 +66,10 @@ public class TaskManager : MonoBehaviour
         this.timeElapsed -= Time.deltaTime;
         while (this.timeElapsed < 0.0f)
         {
-            SpawnTask();
+            if (randomSpawn)
+            {
+                SpawnTask();
+            }
             this.timeElapsed += this.cooldown;
         }
     }

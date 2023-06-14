@@ -303,6 +303,7 @@ MonoBehaviour:
   taskManager: {fileID: 603693306}
   vignetteController: {fileID: 1841643957}
   minigame: {fileID: 1739454520}
+  spoons: 0
   spoonsText: {fileID: 1345893123}
   fatigueOverlay: {fileID: 1781227944}
   lossText: {fileID: 532705958}
@@ -1778,7 +1779,8 @@ MonoBehaviour:
   spawnWidth: 12
   spawnHeight: 12
   test: {fileID: 584844287}
-  dailyTasks: 15
+  dailyTasks: 12
+  randomSpawn: 0
 --- !u!1 &640318829
 GameObject:
   m_ObjectHideFlags: 0

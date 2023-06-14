@@ -45,7 +45,7 @@ public class MinigameController : MonoBehaviour
         this.displayingNumbers = true;
     }
 
-    void endGame()
+    public void endGame()
     {
         this.player.GetComponent<PlayerController>().decrementTask();
         this.player.GetComponent<PlayerController>().allowMovement = true;
@@ -93,6 +93,7 @@ public class MinigameController : MonoBehaviour
         if (this.index >= sequenceLength)
         {
 			this.player.GetComponent<PlayerController>().spoons -= 5;
+            this.player.GetComponent<PlayerController>().UpdateText();
             endGame();
         }
     }
@@ -126,7 +127,11 @@ public class MinigameController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Keypad0) || Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            buttonPressed(0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))
         {
             buttonPressed(1);
         }
