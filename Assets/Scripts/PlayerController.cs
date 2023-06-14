@@ -12,12 +12,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject taskManager;
     TaskManager managerScript;
     [SerializeField] GameObject vignetteController;
+    [SerializeField] GameObject minigame;
     float inputHorizontal;
     float inputVertical;
 
-    int spoons;
+    public int spoons;
     float timer;
-    const float MAX_TIMER = 0.5f;
+    const float MAX_TIMER = 2.0f;
     [SerializeField] TextMeshProUGUI spoonsText;
     bool isMoving = false;
     // 0: forward (down, towards camera)
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject fatigueOverlay;
 
     [SerializeField] TextMeshProUGUI lossText;
+    public bool allowMovement;
 
 
     // Start is called before the first frame update
@@ -39,7 +41,15 @@ public class PlayerController : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         managerScript = taskManager.GetComponent<TaskManager>();
 
-        Restart();
+        Lose();
+    }
+
+    void Lose()
+    {
+        spoons = -100;
+        fatigue = 0f;
+        allowMovement = false;
+        managerScript.randomSpawn = false;
     }
 
     void Restart()
@@ -47,6 +57,7 @@ public class PlayerController : MonoBehaviour
         spoons = 100;
         timer = 0f;
         fatigue = 1f;
+        managerScript.randomSpawn = true;
         UpdateText();
 
         GameObject[] allTasks = GameObject.FindGameObjectsWithTag("Task");
@@ -62,6 +73,7 @@ public class PlayerController : MonoBehaviour
 
         // reset the player's position to its initial position
         gameObject.transform.position = new Vector3(8f, -5f, 0f);
+        allowMovement = true;
     }
 
     // Update is called once per frame
@@ -94,6 +106,10 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && fatigue <= 0)
         {
             Restart();
+        }
+        else if (Input.GetKeyDown(KeyCode.L))
+        {
+            Lose();
         }
     }
 
@@ -134,10 +150,27 @@ public class PlayerController : MonoBehaviour
     // physics-related movement goes here
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(inputHorizontal, inputVertical).normalized * walkSpeed * fatigue;
+        if (allowMovement)
+        {
+            rb.velocity = new Vector2(inputHorizontal, inputVertical).normalized * walkSpeed * fatigue;
+        }
+        else
+        {
+            rb.velocity = new Vector2(0, 0);
+        }
     }
 
-    void UpdateText()
+    public void decrementTask()
+    {
+        managerScript.decrementTasks();
+    }
+
+    public void spawnTask()
+    {
+        managerScript.SpawnTask();
+    }
+
+    public void UpdateText()
     {
         lossText.text = "";
 
@@ -147,14 +180,16 @@ public class PlayerController : MonoBehaviour
 
             if (spoons <= -100)
             {
+                minigame.SetActive(false);
+                allowMovement = false;
                 lossText.text = "You lose. But there is no escape. Press R to restart.";
             }
         }
         else
         {
             spoonsText.SetText("Spoons: {0}", spoons);
-        }
-    }
+		}
+	}
 
     public Vector2 GetVelocity()
     {
@@ -166,7 +201,9 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Task"))
         {
             Destroy(collision.gameObject);
-            managerScript.decrementTasks();
+            rb.velocity = new Vector2(0, 0);
+            //minigame.GetComponent<MinigameController>().startGame((int)(fatigue * -6.0f + 10.0f));
+            minigame.GetComponent<MinigameController>().startGame((int)((100 - spoons) / 28.75f) + 4);
         }
         else if (collision.gameObject.CompareTag("Bed"))
         {
