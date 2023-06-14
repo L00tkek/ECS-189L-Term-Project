@@ -1,15 +1,22 @@
 # Game Basic Information #
 
-## Summary ##
+## Summary ##  
 
 **A paragraph-length pitch for your game.**
 
 ## Gameplay Explanation ##
-
-**In this section, explain how the game should be played. Treat this as a manual within a game. It is encouraged to explain the button mappings and the most optimal gameplay strategy.**
-
-
-**If you did work that should be factored in to your grade that does not fit easily into the proscribed roles, add it here! Please include links to resources and descriptions of game-related material that does not fit into roles here.**
+### Controls
+- WASD or arrow keys to move
+- 0-9 number keys to complete tasks 
+    - (alternatively, you can click on the GUI)
+- Backspace or Escape to cancel tasks
+    - (alternatively, you can click on the GUI)
+ 
+### Strategy
+- have you tried getting a planner?
+- time management
+- prioritize!
+- if you lose, you're clearly not trying hard enough. 
 
 # Contributions
 Both of us were originally part of the data team in the social proxemics research project, but most of the work for that project ended up getting done
