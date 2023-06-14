@@ -38,12 +38,11 @@ and both of us tended to work on different parts of the same systems. Our contri
 - wrote the README
 
 ## Lucy's Contributions
-- created the player sprite from scratch
-- added the position lock camera controller
-- wrote the animation logic for the player sprite
-- wrote logic for randomly spawning tasks
-- wrote code that tracks and displays the current number of tasks
-- implemented the mechanic where lack of spoons slows your movement speed
-- implemented the vignette effect when spoons are low
-- implemented the entirety of the number-matching minigame
-- handled licenses
+I copied over the position lock camera controller from exercise 2. I copied
+over the player sprite from a previous project and wrote the logic to
+animate it. I wrote the task manager to randomly spawn tasks and to spawn tasks
+in random places as well as display the current number of tasks. I also did
+the logic for slowing down the player according to the number of spoons/knives
+the player has. I also created a vignette effect for when the player gets into
+knives. I also implemented the memory minigame and integrated it into the rest
+of the game with some help from Sage to get the layers right.
