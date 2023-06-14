@@ -20,7 +20,7 @@ and both of us tended to work on different parts of the same systems. Our contri
 ## Sage's Contributions
 - found and added all assets except for the player sprite
 - created the task prefab and wrote code to make the player destroy tasks on contact
-- made the player track a number of spoons that counts down over time
+- made the player track a number of spoons that counts down over time (and displayed this quantity)
 - created the game environment (just a single room)
 - added the bed and wrote code to "start a new day" (give the player spoons and spawn more tasks) 
   on contact with it
