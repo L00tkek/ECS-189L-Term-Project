@@ -28,17 +28,30 @@ in just five days so that we would have something to show as our final project. 
 and both of us tended to work on different parts of the same systems. Our contributions are below.
 
 ## Sage's Contributions
-- found and added all assets except for the player sprite
-- created the task prefab and wrote code to make the player destroy tasks on contact
-- made the player track a number of spoons that counts down over time (and displayed this quantity)
-- created the game environment (just a single room)
-- added the bed and wrote code to "start a new day" (give the player spoons and spawn more tasks) 
-  on contact with it
-- implemented the mechanic where lack of spoons adds a darkening overlay onto the screen
-- wrote the code to handle when the player loses the game by getting to 100 knives or by reaching 25
-  pending tasks
-- added keyboard controls for the number-matching minigame
-- wrote the README
+I was responsible for implementing many of the simple foundational concepts for our game, such as implementing
+player movement with WASD and the arrow keys.
+I also wrote code to implement a counter of spoons that counts down over time, as well as the code to
+display this quantity in a text box on screen. Additionally, I created the task prefab and wrote the initial logic for 
+handling tasks, which was that tasks simply disappear upon contact with the player. I added the bed 
+and the sleeping mechanic, where touching the bed provides the player with more spoons at the cost of spawning more 
+tasks. I built the room that the game takes place in to provide a simple environment that would facilitate gameplay. 
+Lastly for these foundational aspects, I wrote code to handle when the player
+loses the game by accumulating 100 knives. This entailed adding the fade-to-black into the "you lose" message, and also
+writing code to allow the player to restart the game after losing. Part of this involved causing the game to start out in
+a loss state, which furthers the themes of being trapped in a cycle that one can only lose.
+
+In addition to those, I implemented several features that add polish and help to flesh out the game's themes.
+I was responsible for finding and adding all assets to the game except for the player sprite (which was 
+made by Lucy). These were primarily just placeholders as we were pressed for time, but it helped the game look more
+professional. I cooperated with Lucy to design the fatigue mechanic, where having fewer spoons causes various effects
+that are supposed to show how the player's fatigue is affecting them. Lucy and I jointly decided that fatigue would be
+applied on a square root curve, and would not be applied when the player's spoons are positive. This makes
+the transition from positive to negative spoons much sharper and more noticeable, and also makes it feel like
+the player is slipping into fatigue more quickly the closer they get to 100 knives. I specifically implemented
+the dark red overlay that fades to black once the player reaches 100 knives. I helped Lucy with the minigame mechanic
+by adding keyboard controls so that players could type the numbers instead of having to click them, which was
+suggested by our playtesters. Lastly, I wrote the README for our repository, which contains information about the game
+and credit for all of the assets used. 
 
 ## Lucy's Contributions
 I copied over the position lock camera controller from exercise 2. I copied
