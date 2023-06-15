@@ -2,7 +2,10 @@
 
 ## Summary ##  
 
-**A paragraph-length pitch for your game.**
+You have tasks you need to do, but you're disabled and have a limited amount of
+spoons (energy) to do those tasks. You can rest to recover spoons, but you'll
+get more tasks. You must find a balance in order to complete all your tasks
+without running out of spoons. How long can you survive?
 
 ## Gameplay Explanation ##
 ### Controls
