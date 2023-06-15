@@ -54,6 +54,8 @@ suggested by our playtesters. Lastly, I wrote the README for our repository, whi
 and credit for all of the assets used. 
 
 ## Lucy's Contributions
+Sage and I both discussed the metaphors and themes of the game and how to
+design the mechanics in a way that complements those themes and metaphors.
 I copied over the position lock camera controller from exercise 2. I copied
 over the player sprite from a previous project and wrote the logic to
 animate it. I wrote the task manager to randomly spawn tasks and to spawn tasks
